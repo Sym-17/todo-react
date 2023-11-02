@@ -27,15 +27,16 @@ function Todo() {
   const [error, setError] = useState<string>("");
   const [allTodos, setAllTodos] = useState<Todo[]>([]);
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    inputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, [todo, error, allTodos]);
 
   const addTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setError("");
-    console.log(e.target.value);
     setTodo(e.target.value);
   };
 
@@ -107,7 +108,7 @@ function Todo() {
 
           {allTodos.map((Todo) => {
             return (
-              <div>
+              <div key={Todo.id}>
                 {Todo.wantToEdit === false ? (
                   <div className="flex justify-center align-middle items-center mt-6">
                     <p className="border-2 bg-white rounded-md p-2 w-full text-indigo-900">
