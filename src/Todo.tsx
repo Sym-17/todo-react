@@ -73,10 +73,12 @@ function Todo() {
 
   return (
     <main className="w-3/4">
-      <div className="mt-20 ml-60 mr-60 pb-10 flex-col justify-center items-center align-middle">
+      <div className="mt-14 md:mt-20 lg:ml-60 md:ml-30 lg:mr-60 md:mr-30 pb-10   flex-col justify-center items-center align-middle">
         <div>
           <header>
-            <h1 className="font-bold text-center text-7xl text-white ">Todo</h1>
+            <h1 className="font-bold text-center text-5xl md:text-7xl text-white ">
+              Todo
+            </h1>
           </header>
           <div className="flex justify-center align-middle mt-12 w-full gap-1 items-center">
             <input
@@ -104,7 +106,9 @@ function Todo() {
         </div>
 
         <div className="flex-col justify-center align-middle w-full gap-1 items-center mt-12">
-          <h1 className="text-white font-semibold text-4xl">My Todos</h1>
+          <h1 className="text-white font-semibold text-3xl md:text-4xl">
+            My Todos
+          </h1>
 
           {allTodos.map((Todo) => {
             return (
@@ -116,14 +120,14 @@ function Todo() {
                       {Todo.todo}{" "}
                     </p>
                     <PencilSquareIcon
-                      className="w-8 h-8 text-white ml-4 cursor-pointer"
+                      className="w-8 h-8 text-white ml-2 md:ml-4 cursor-pointer"
                       onClick={() => {
                         Todo.wantToEdit = true;
                         setEditedTodo(Todo.todo);
                       }}
                     />
                     <TrashIcon
-                      className="w-8 h-8 text-white ml-4 cursor-pointer"
+                      className="w-8 h-8 text-white ml-2 md:ml-4 cursor-pointer"
                       onClick={() => deleteTodo(Todo.id)}
                     />{" "}
                   </div>
