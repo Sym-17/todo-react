@@ -6,8 +6,20 @@ import {
 } from "@heroicons/react/24/outline";
 import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
-
-// model.id = nanoid() //=> "V1StGXR8_Z5jdHi6B-myT";
+import {
+  checkCircleIcon,
+  eachTodoDiv,
+  editIcon,
+  errorText,
+  headerH1,
+  inputCheckbox,
+  inputWithButton,
+  mainDiv,
+  mainInput,
+  plusCircleIcon,
+  todoDiv,
+  todoHeading,
+} from "./styles/TodoCSS";
 
 // interface Todo {
 //   id: string,
@@ -19,11 +31,13 @@ type Todo = {
   id: string;
   todo: string;
   wantToEdit: boolean;
+  checkedOrNot: boolean;
 };
 
 function Todo() {
   const [todo, setTodo] = useState<string>("");
   const [editedTodo, setEditedTodo] = useState<string>("");
+  const [check, setCheck] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [allTodos, setAllTodos] = useState<Todo[]>([]);
 
@@ -40,11 +54,12 @@ function Todo() {
     setTodo(e.target.value);
   };
 
-  const addOneTodo = () => {
+  const addOneTodoToAllTodos = () => {
     const newTodo = {
       id: nanoid(4),
       todo: todo, //only todo can be written
       wantToEdit: false,
+      checkedOrNot: false,
     };
     setAllTodos([...allTodos, newTodo]);
     setTodo("");
@@ -55,94 +70,139 @@ function Todo() {
       return Todo.id != id;
     });
     setAllTodos([...newAllTodos]);
+    setError("");
   };
 
   const editTodo = (id: string) => {
     allTodos.map((Todo) => {
       if (Todo.id === id) {
-        Todo.todo = editedTodo;
-        Todo.wantToEdit = false;
+        if (editedTodo === "") showError();
+        else {
+          setError("");
+          Todo.todo = editedTodo;
+          Todo.wantToEdit = false;
+        }
       }
     });
     setEditedTodo("");
   };
 
+  const checkTodo = (id: string) => {
+    allTodos.map((Todo) => {
+      if (Todo.id === id) {
+        if (Todo.checkedOrNot === false) {
+          Todo.checkedOrNot = true;
+        } else {
+          Todo.checkedOrNot = false;
+        }
+      }
+    });
+    check === false ? setCheck(true) : setCheck(false);
+  };
+
   const showError = () => {
-    setError("Undefined Value!");
+    setError("You cannot add an empty todo! Write something.");
   };
 
   return (
     <main className="w-3/4">
-      <div className="mt-14 md:mt-20 lg:ml-60 md:ml-30 lg:mr-60 md:mr-30 pb-10   flex-col justify-center items-center align-middle">
+      <div className={mainDiv}>
         <div>
           <header>
-            <h1 className="font-bold text-center text-5xl md:text-7xl text-white ">
-              Todo
-            </h1>
+            <h1 className={headerH1}>Todo</h1>
           </header>
-          <div className="flex justify-center align-middle mt-12 w-full gap-1 items-center">
+          <div className={inputWithButton}>
             <input
               type="text"
               placeholder="Add your todo"
-              className="border-2 rounded-md p-2 w-full text-indigo-900 outline-none"
+              className={mainInput}
               value={todo}
               onChange={addTodo}
               ref={inputRef}
               //   controlling by pressing enter key
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
-                  todo === "" ? showError() : addOneTodo();
+                  todo === "" ? showError() : addOneTodoToAllTodos();
                 }
               }}
             />
             <PlusCircleIcon
-              className="w-10 h-10 text-white ml-4 cursor-pointer"
-              onClick={todo === "" ? showError : addOneTodo}
+              className={plusCircleIcon}
+              onClick={todo === "" ? showError : addOneTodoToAllTodos}
             />
           </div>
-          {error && (
-            <p className="text-white font-semibold p-2 text-2xl">{error}</p>
+          {error ? (
+            <p className={errorText}>{error}</p>
+          ) : (
+            <p className={errorText}></p>
           )}
         </div>
 
-        <div className="flex-col justify-center align-middle w-full gap-1 items-center mt-12">
-          <h1 className="text-white font-semibold text-3xl md:text-4xl">
-            My Todos
-          </h1>
+        <div className={todoDiv}>
+          <h1 className={todoHeading}>My Todos</h1>
 
           {allTodos.map((Todo) => {
             return (
               <div key={Todo.id}>
                 {Todo.wantToEdit === false ? (
-                  <div className="flex justify-center align-middle items-center mt-6">
-                    <p className="border-2 bg-white rounded-md p-2 w-full text-indigo-900">
-                      {" "}
-                      {Todo.todo}{" "}
-                    </p>
-                    <PencilSquareIcon
-                      className="w-8 h-8 text-white ml-2 md:ml-4 cursor-pointer"
-                      onClick={() => {
-                        Todo.wantToEdit = true;
-                        setEditedTodo(Todo.todo);
-                      }}
-                    />
-                    <TrashIcon
-                      className="w-8 h-8 text-white ml-2 md:ml-4 cursor-pointer"
-                      onClick={() => deleteTodo(Todo.id)}
-                    />{" "}
-                  </div>
+                  Todo.checkedOrNot === false ? (
+                    <div className={eachTodoDiv}>
+                      <input
+                        type="checkbox"
+                        className={inputCheckbox}
+                        onClick={() => checkTodo(Todo.id)}
+                      />
+                      <p className={mainInput}> {Todo.todo} </p>
+                      <PencilSquareIcon
+                        className={editIcon}
+                        onClick={() => {
+                          Todo.wantToEdit = true;
+                          setEditedTodo(Todo.todo);
+                          setError("");
+                        }}
+                      />
+                      <TrashIcon
+                        className={editIcon}
+                        onClick={() => deleteTodo(Todo.id)}
+                      />{" "}
+                    </div>
+                  ) : (
+                    <div className={eachTodoDiv}>
+                      <input
+                        type="checkbox"
+                        className={inputCheckbox}
+                        onClick={() => checkTodo(Todo.id)}
+                      />
+                      <p className="border-2 bg-[#DDF2FD] rounded-md p-2 w-full text-[#116A7B] outline-none line-through overflow-hidden">
+                        {" "}
+                        {Todo.todo}{" "}
+                      </p>
+                      <PencilSquareIcon
+                        className={editIcon}
+                        onClick={() => {
+                          Todo.wantToEdit = true;
+                          setEditedTodo(Todo.todo);
+                          setError("");
+                        }}
+                      />
+                      <TrashIcon
+                        className={editIcon}
+                        onClick={() => deleteTodo(Todo.id)}
+                      />{" "}
+                    </div>
+                  )
                 ) : (
-                  <div className="flex justify-center align-middle items-center mt-6">
+                  <div className={eachTodoDiv}>
                     <input
                       type="text"
-                      className="border-2 bg-white rounded-md p-2 w-full text-indigo-900 outline-none"
+                      className={mainInput}
                       value={editedTodo}
                       onChange={(e) => {
                         setEditedTodo(e.target.value);
                       }}
                     />
                     <CheckCircleIcon
-                      className="w-8 h-8 text-white ml-4 cursor-pointer"
+                      className={checkCircleIcon}
                       onClick={() => editTodo(Todo.id)}
                     />
                   </div>

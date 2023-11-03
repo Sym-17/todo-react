@@ -2,7 +2,7 @@ import Todo from "./Todo";
 
 function App() {
   return (
-    <div className="flex justify-center h-screen bg-gradient-to-r from-indigo-400 to-cyan-400 overflow-scroll">
+    <div className="flex justify-center h-screen bg-gradient-to-r from-[#427D9D] to-[#164863] overflow-scroll">
       <Todo />
     </div>
   );
