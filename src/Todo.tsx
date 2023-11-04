@@ -20,6 +20,7 @@ import {
   todoDiv,
   todoHeading,
 } from "./styles/TodoCSS";
+import { Link } from "react-router-dom";
 
 // interface Todo {
 //   id: string,
@@ -139,7 +140,14 @@ function Todo() {
         </div>
 
         <div className={todoDiv}>
-          <h1 className={todoHeading}>My Todos</h1>
+          <div className="flex justify-between">
+            <h1 className={todoHeading}>My Todos</h1>
+            <Link to="/notes">
+              <h1 className="text-[#164863] font-normal text-3xl md:text-4xl">
+                Add Notes
+              </h1>
+            </Link>
+          </div>
 
           {allTodos.map((Todo) => {
             return (
