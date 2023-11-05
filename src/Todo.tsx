@@ -7,7 +7,6 @@ import {
 import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 import { Link } from "react-router-dom";
-import EditIcon from "./EditIcon";
 
 // interface Todo {
 //   id: string,
