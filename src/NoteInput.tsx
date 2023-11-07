@@ -8,8 +8,8 @@ interface NoteInputProps {
 
 function NoteInput(props: NoteInputProps): JSX.Element {
   return (
-    <div className="flex justify-center mb-10 mt-10">
-      <div className="w-[300px] md:w-[600px] h-32 rounded-lg bg-white shadow-2xl">
+    <div className="flex justify-center mb-10 z-40">
+      <div className="w-[300px] sm:w-[400px] lg:w-[600px] h-32 rounded-lg bg-white shadow-2xl">
         <input
           type="text"
           className="p-2 w-full h-9 bg-transparent outline-none border-b-[1px] border-black-100 text-[#164863] font-semibold "

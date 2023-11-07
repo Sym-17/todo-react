@@ -111,8 +111,8 @@ function Notes() {
   };
 
   return (
-    <main className="flex-col w-full mb-auto">
-      <div className="flex-col justify-center items-center align-middle mt-6 md:mt-8 ml-8 2xl:ml-[196px] md:ml-36 mr-8 2xl:mr-[196px] md:mr-36 pb-10">
+    <main className="flex-col w-full">
+      <div className="flex-col justify-center items-center align-middle mt-6 md:mt-8 ml-8 2xl:ml-56 md:ml-20 mr-8 2xl:mr-56 md:mr-20 pb-10">
         <NoteInput
           title={title}
           description={description}
@@ -122,7 +122,7 @@ function Notes() {
         />
 
         <header className="flex justify-between items-center">
-          <h1 className="text-start font-medium text-4xl md:text-5xl text-[#164863]">
+          <h1 className="text-start font-medium text-4xl md:text-5xl text-[#3f3d56]">
             Your Notes
           </h1>
           <p className="text-red-600 font-semibold text-base md:text-2xl text-right">
@@ -130,7 +130,7 @@ function Notes() {
           </p>
         </header>
 
-        <div className="mt-10 mb-auto">
+        <div className="mt-10">
           {allNotes.length === 0 ? (
             <p className="text-2xl font-medium text-[#64CCC5]">
               No saved notes!
@@ -150,8 +150,8 @@ function Notes() {
                     className={
                       // Checked or not
                       allChecks.get(id) === false
-                        ? "w-36 2xl:w-52 h-44 bg-white border-2 border-[#3a4d3929] rounded-lg"
-                        : "w-36 2xl:w-52 h-44 bg-[#FFF2D8] border-2 border-[#3A4D39] rounded-lg"
+                        ? "w-36 2xl:w-52 h-44 bg-white border-2 border-[#3A4D39] rounded-lg"
+                        : "w-36 2xl:w-52 h-44 bg-[#DDF2FD] border-none rounded-lg contrast-less"
                     }
                     key={id}
                   >

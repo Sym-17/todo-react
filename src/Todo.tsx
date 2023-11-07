@@ -6,7 +6,6 @@ import {
 } from "@heroicons/react/24/outline";
 import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
-import { Link } from "react-router-dom";
 
 // interface Todo {
 //   id: string,
@@ -92,19 +91,19 @@ function Todo() {
   };
 
   return (
-    <main className="w-3/4">
-      <div className="flex-col justify-center items-center align-middle mt-14 md:mt-20 lg:ml-60 md:ml-30 lg:mr-60 md:mr-30 pb-10 ">
+    <main className="w-full">
+      <div className="flex-col justify-center items-center align-middle mt-14 md:mt-20 md:ml-20 lg:ml-30 2xl:ml-60 lg:mr-30 2xl:mr-60 md:mr-20 pb-10 ">
         <div>
-          <header>
-            <h1 className="font-medium text-center text-5xl md:text-7xl text-[#164863]">
+          {/* <header>
+            <h1 className="font-medium text-center text-5xl md:text-7xl text-[#3f3d56]">
               Todo
             </h1>
-          </header>
-          <div className="flex justify-center align-middle items-center mt-12 w-full gap-1 ">
+          </header> */}
+          <div className="flex justify-center align-middle items-center pr-6 md:pr-20 lg:pr-56 pl-6 md:pl-20 lg:pl-56 w-full gap-1 ">
             <input
               type="text"
               placeholder="Add your todo"
-              className=" bg-white rounded-md p-2 w-full text-[#164863] outline-none overflow-hidden border-2 border-[#3A4D39]"
+              className=" bg-white rounded-md p-2 w-full text-[#3f3d56] outline-none overflow-hidden border-2 border-[#3A4D39]"
               value={todo}
               onChange={addTodo}
               ref={inputRef}
@@ -116,29 +115,24 @@ function Todo() {
               }}
             />
             <PlusCircleIcon
-              className="w-10 h-10 text-[#164863] ml-4 cursor-pointer"
+              className="w-10 h-10 text-[#3f3d56] ml-4 cursor-pointer"
               onClick={todo === "" ? showError : addOneTodoToAllTodos}
             />
           </div>
           {error ? (
-            <p className="flex justify-center text-[#164863] font-normal p-2 text-2xl">
+            <p className="flex justify-center text-[#3f3d56] font-normal p-2 text-2xl">
               {error}
             </p>
           ) : (
-            <p className="flex justify-center text-[#164863] font-normal p-2 text-2xl"></p>
+            <p className="flex justify-center text-[#3f3d56] font-normal p-2 text-2xl"></p>
           )}
         </div>
 
-        <div className="flex-col justify-center align-middle w-full gap-1 items-center mt-12">
+        <div className="flex-col justify-center align-middle pr-6 md:pr-20 lg:pr-56 pl-6 md:pl-20 lg:pl-56 gap-1 items-center mt-12">
           <div className="flex justify-between">
-            <h1 className="text-[#164863] font-normal text-3xl md:text-4xl">
+            <h1 className="text-[#3f3d56] font-normal text-3xl md:text-4xl">
               My Todos
             </h1>
-            <Link to="/notes">
-              <h1 className="text-[#164863] font-normal text-3xl md:text-4xl">
-                Add Notes
-              </h1>
-            </Link>
           </div>
 
           {allTodos.map((Todo) => {
@@ -149,15 +143,15 @@ function Todo() {
                     <div className="flex justify-center align-middle items-center mt-6">
                       <input
                         type="checkbox"
-                        className="w-8 h-8 text-[#164863] mr-2 md:mr-4 cursor-pointer accent-[#DDF2FD]"
+                        className="w-8 h-8 text-[#3f3d56] mr-2 md:mr-4 cursor-pointer accent-[#DDF2FD]"
                         onClick={() => checkTodo(Todo.id)}
                       />
-                      <p className=" bg-white rounded-md p-2 w-full text-[#164863] outline-none overflow-hidden border-2 border-[#3A4D39]">
+                      <p className=" bg-white rounded-md p-2 w-full text-[#3f3d56] outline-none overflow-hidden border-2 border-[#3A4D39]">
                         {" "}
                         {Todo.todo}{" "}
                       </p>
                       <PencilSquareIcon
-                        className="w-8 h-8 text-[#164863] ml-2 md:ml-4 cursor-pointer"
+                        className="w-8 h-8 text-[#3f3d56] ml-2 md:ml-4 cursor-pointer"
                         onClick={() => {
                           Todo.wantToEdit = true;
                           setEditedTodo(Todo.todo);
@@ -165,7 +159,7 @@ function Todo() {
                         }}
                       />
                       <TrashIcon
-                        className="w-8 h-8 text-[#164863] ml-2 md:ml-4 cursor-pointer"
+                        className="w-8 h-8 text-[#3f3d56] ml-2 md:ml-4 cursor-pointer"
                         onClick={() => deleteTodo(Todo.id)}
                       />{" "}
                     </div>
@@ -173,7 +167,7 @@ function Todo() {
                     <div className="flex justify-center align-middle items-center mt-6">
                       <input
                         type="checkbox"
-                        className="w-8 h-8 text-[#164863] mr-2 md:mr-4 cursor-pointer accent-[#DDF2FD]"
+                        className="w-8 h-8 text-[#3f3d56] mr-2 md:mr-4 cursor-pointer accent-[#DDF2FD]"
                         onClick={() => checkTodo(Todo.id)}
                       />
                       <p className="border-2 bg-[#DDF2FD] rounded-md p-2 w-full text-[#116A7B] outline-none line-through overflow-hidden">
@@ -181,7 +175,7 @@ function Todo() {
                         {Todo.todo}{" "}
                       </p>
                       <PencilSquareIcon
-                        className="w-8 h-8 text-[#164863] ml-2 md:ml-4 cursor-pointer"
+                        className="w-8 h-8 text-[#3f3d56] ml-2 md:ml-4 cursor-pointer"
                         onClick={() => {
                           Todo.wantToEdit = true;
                           setEditedTodo(Todo.todo);
@@ -189,7 +183,7 @@ function Todo() {
                         }}
                       />
                       <TrashIcon
-                        className="w-8 h-8 text-[#164863] ml-2 md:ml-4 cursor-pointer"
+                        className="w-8 h-8 text-[#3f3d56] ml-2 md:ml-4 cursor-pointer"
                         onClick={() => deleteTodo(Todo.id)}
                       />{" "}
                     </div>
@@ -198,14 +192,14 @@ function Todo() {
                   <div className="flex justify-center align-middle items-center mt-6">
                     <input
                       type="text"
-                      className=" bg-white rounded-md p-2 w-full text-[#164863] outline-none overflow-hidden border-2 border-[#3A4D39]"
+                      className=" bg-white rounded-md p-2 w-full text-[#3f3d56] outline-none overflow-hidden border-2 border-[#3A4D39]"
                       value={editedTodo}
                       onChange={(e) => {
                         setEditedTodo(e.target.value);
                       }}
                     />
                     <CheckCircleIcon
-                      className="w-8 h-8 text-[#164863] ml-4 cursor-pointer"
+                      className="w-8 h-8 text-[#3f3d56] ml-4 cursor-pointer"
                       onClick={() => editTodo(Todo.id)}
                     />
                   </div>
