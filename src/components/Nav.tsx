@@ -12,7 +12,7 @@ export default function Nav() {
   return (
     <nav className="flex flex-row justify-between align-middle items-center h-20 pr-6 pt-10 2xl:pt-0 md:pr-20 lg:pr-20 2xl:pr-56 pl-6 md:pl-20 lg:pl-20 2xl:pl-56">
       <Link to="/home">
-        <h1 className="flex justify-center align-middle items-center text-start font-medium text-2xl md:text-3xl text-[#F86F03]">
+        <h1 className="text-start font-medium text-2xl md:text-3xl text-[#F86F03]">
           NotePad
         </h1>
       </Link>
@@ -102,78 +102,3 @@ export default function Nav() {
     </nav>
   );
 }
-
-// import { NavLink, Link } from "react-router-dom";
-// import { useRef } from "react";
-// import { Bars3BottomRightIcon } from "@heroicons/react/20/solid";
-
-// export default function Nav() {
-//   const windowWidth: React.MutableRefObject<number> = useRef(window.innerWidth);
-//   return (
-//     <nav className="flex flex-row justify-between align-middle items-center h-20 pr-6 lg:pr-56 pl-6 lg:pl-56 z-50">
-//       <Link to="/home">
-//         <h1 className="flex justify-center align-middle items-center text-start font-medium text-2xl md:text-3xl text-[#F86F03]">
-//           NotePad
-//         </h1>
-//       </Link>
-
-//       {windowWidth.current <= 640 ? (
-//         <Bars3BottomRightIcon className="w-10 p-2 text-[#F86F03]" />
-//       ) : (
-//         <div className="flex justify-between w-1/4 items-center">
-//           <NavLink
-//             to="/notes"
-//             className={(navInfo) =>
-//               navInfo.isActive
-//                 ? "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#F86F03] hover:"
-//                 : "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover:"
-//             }
-//           >
-//             Notes
-//           </NavLink>
-
-//           <NavLink
-//             to="/todo"
-//             className={(navInfo) =>
-//               navInfo.isActive
-//                 ? "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#F86F03] hover:"
-//                 : "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover:"
-//             }
-//           >
-//             Todo
-//           </NavLink>
-//           <h1 className="text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover:">
-//             Contact Us
-//           </h1>
-//         </div>
-//       )}
-
-//       {/* <div className="flex justify-between w-1/4 items-center">
-//         <NavLink
-//           to="/notes"
-//           className={(navInfo) =>
-//             navInfo.isActive
-//               ? "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#F86F03] hover:"
-//               : "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover:"
-//           }
-//         >
-//           Notes
-//         </NavLink>
-
-//         <NavLink
-//           to="/todo"
-//           className={(navInfo) =>
-//             navInfo.isActive
-//               ? "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#F86F03] hover:"
-//               : "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover:"
-//           }
-//         >
-//           Todo
-//         </NavLink>
-//         <h1 className="text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover:">
-//           Contact Us
-//         </h1>
-//       </div> */}
-//     </nav>
-//   );
-// }

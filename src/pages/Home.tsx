@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import paperSvg from "./assets/undraw_taking_notes_re_bnaf.svg";
+import paperSvg from "../assets/undraw_taking_notes_re_bnaf.svg";
 
 export default function Home() {
   return (

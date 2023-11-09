@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import Todo from "./Todo";
-import Notes from "./Notes";
-import Home from "./Home";
+import Todo from "../pages/Todo";
+import Notes from "../pages/Notes";
+import Home from "../pages/Home";
 import Layout from "./Layout";
 // import LayoutWithScroll from "./LayoutWithScroll";
 

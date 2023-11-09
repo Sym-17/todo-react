@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 
-import NoteInput from "./NoteInput";
-import NoteOutput from "./NoteOutput";
+import NoteInput from "../components/NoteInput";
+import NoteOutput from "../components/NoteOutput";
 
 type Notes = {
   id: string;
@@ -147,12 +147,11 @@ function Notes() {
                 //without edit (checks also)
                 return (
                   <div
-                    className={
-                      // Checked or not
+                    className={`w-36 2xl:w-52 h-44 rounded-lg ${
                       allChecks.get(id) === false
-                        ? "w-36 2xl:w-52 h-44 bg-white border-2 border-[#3A4D39] rounded-lg"
-                        : "w-36 2xl:w-52 h-44 bg-[#DDF2FD] border-none rounded-lg contrast-less"
-                    }
+                        ? " bg-white border-2 border-[#3A4D39]"
+                        : " bg-[#DDF2FD] border-none"
+                    }`}
                     key={id}
                   >
                     <NoteOutput
