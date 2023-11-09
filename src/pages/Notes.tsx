@@ -98,10 +98,11 @@ function Notes() {
   };
 
   const checkANote = (id: string) => {
-    if (allChecks.get(id) === false) allChecks.set(id, true);
-    else allChecks.set(id, false);
+    allChecks.get(id) === false
+      ? allChecks.set(id, true)
+      : allChecks.set(id, false);
 
-    check === false ? setCheck(true) : setCheck(false);
+    setCheck(!check);
   };
 
   const editIconClick = (id: string, title: string, description: string) => {
@@ -131,13 +132,10 @@ function Notes() {
         </header>
 
         <div className="mt-10">
-          {allNotes.length === 0 ? (
-            <p className="text-2xl font-medium text-[#64CCC5]">
-              No saved notes!
-            </p>
-          ) : (
-            <p></p>
-          )}
+          <p className="text-2xl font-medium text-[#64CCC5]">
+            {allNotes.length === 0 ? "No saved notes!" : ""}
+          </p>
+
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
             {/* Show all notes */}
 
