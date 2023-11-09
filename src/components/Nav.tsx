@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Bars3BottomRightIcon, XCircleIcon } from "@heroicons/react/20/solid";
+import NavText from "./NavText";
 
 export default function Nav() {
   const [showMenu, setShowMenu] = useState(false);
@@ -18,48 +19,30 @@ export default function Nav() {
       </Link>
 
       {window.innerWidth <= 640 && showMenu && (
-        <div className="fixed flex flex-col top-0 left-0 h-1/3 w-1/2 bg-white p-4 rounded-md">
+        <div className="fixed flex flex-col top-0 left-0 h-1/3 w-1/2 bg-white p-5 rounded-md gap-3">
           <div className="flex flex-row justify-between">
-            <NavLink
+            <NavText
               to="/home"
-              onClick={() => setShowMenu(!showMenu)}
-              className={(navInfo) =>
-                navInfo.isActive
-                  ? " text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#F86F03] hover: p-2"
-                  : " text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover: p-2"
-              }
-            >
-              Home
-            </NavLink>
+              showMenu={() => setShowMenu(!showMenu)}
+              text="Home"
+            />
             <XCircleIcon
               onClick={() => setShowMenu(false)}
               className="w-10 text-xl text-[#F86F03]"
             />
           </div>
-          <NavLink
+          <NavText
             to="/notes"
-            onClick={() => setShowMenu(!showMenu)}
-            className={(navInfo) =>
-              navInfo.isActive
-                ? " text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#F86F03] hover: p-2"
-                : " text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover: p-2"
-            }
-          >
-            Notes
-          </NavLink>
-          <NavLink
+            showMenu={() => setShowMenu(!showMenu)}
+            text="Notes"
+          />
+          <NavText
             to="/todo"
-            onClick={() => setShowMenu(!showMenu)}
-            className={(navInfo) =>
-              navInfo.isActive
-                ? " text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#F86F03] hover: p-2"
-                : " text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover: p-2"
-            }
-          >
-            Todo
-          </NavLink>
+            showMenu={() => setShowMenu(!showMenu)}
+            text="Todo"
+          />
           <h1
-            className=" text-xl font-medium border-transparent text-[#3f3d56] p-2"
+            className=" text-xl font-medium text-[#3f3d56]"
             onClick={() => setShowMenu(!showMenu)}
           >
             Contact Us
@@ -73,28 +56,9 @@ export default function Nav() {
         </div>
       ) : (
         <div className="flex justify-between lg:w-1/4 sm:w-1/2 sm:mr-4 items-center">
-          <NavLink
-            to="/notes"
-            className={(navInfo) =>
-              navInfo.isActive
-                ? "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#F86F03] hover:"
-                : "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover:"
-            }
-          >
-            Notes
-          </NavLink>
-
-          <NavLink
-            to="/todo"
-            className={(navInfo) =>
-              navInfo.isActive
-                ? "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#F86F03] hover:"
-                : "text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover:"
-            }
-          >
-            Todo
-          </NavLink>
-          <h1 className="text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56] hover:">
+          <NavText to="/notes" text="Notes" showMenu={() => 0} />
+          <NavText to="/todo" text="Todo" showMenu={() => 0} />
+          <h1 className="text-xl font-medium border-transparent hover:border-[#F86F03] border-b-2 text-[#3f3d56]">
             Contact Us
           </h1>
         </div>
