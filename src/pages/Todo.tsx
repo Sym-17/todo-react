@@ -1,11 +1,8 @@
-import {
-  PlusCircleIcon,
-  TrashIcon,
-  PencilSquareIcon,
-  CheckCircleIcon,
-} from "@heroicons/react/24/outline";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
+import TodoInput from "../components/TodoInput";
+import TodoOutput from "../components/TodoOutput";
 
 // interface Todo {
 //   id: string,
@@ -67,6 +64,9 @@ function Todo() {
           setError("");
           Todo.todo = editedTodo;
           Todo.wantToEdit = false;
+          Todo.checkedOrNot === false
+            ? (Todo.checkedOrNot = false)
+            : (Todo.checkedOrNot = true);
         }
       }
     });
@@ -76,57 +76,36 @@ function Todo() {
   const checkTodo = (id: string) => {
     allTodos.map((Todo) => {
       if (Todo.id === id) {
-        if (Todo.checkedOrNot === false) {
-          Todo.checkedOrNot = true;
-        } else {
-          Todo.checkedOrNot = false;
-        }
+        Todo.checkedOrNot === false
+          ? (Todo.checkedOrNot = true)
+          : (Todo.checkedOrNot = false);
       }
     });
-    check === false ? setCheck(true) : setCheck(false);
+    setCheck(!check);
   };
 
   const showError = () => {
     setError("You cannot add an empty todo! Write something.");
   };
 
+  const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      todo === "" ? showError() : addOneTodoToAllTodos();
+    }
+  };
+
   return (
     <main className="w-full">
       <div className="flex-col justify-center items-center align-middle mt-14 md:mt-20 md:ml-20 lg:ml-30 2xl:ml-60 lg:mr-30 2xl:mr-60 md:mr-20 pb-10 ">
-        <div>
-          {/* <header>
-            <h1 className="font-medium text-center text-5xl md:text-7xl text-[#3f3d56]">
-              Todo
-            </h1>
-          </header> */}
-          <div className="flex justify-center align-middle items-center pr-6 md:pr-20 lg:pr-56 pl-6 md:pl-20 lg:pl-56 w-full gap-1 ">
-            <input
-              type="text"
-              placeholder="Add your todo"
-              className=" bg-white rounded-md p-2 w-full text-[#3f3d56] outline-none overflow-hidden border-2 border-[#3A4D39]"
-              value={todo}
-              onChange={addTodo}
-              ref={inputRef}
-              //   controlling by pressing enter key
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  todo === "" ? showError() : addOneTodoToAllTodos();
-                }
-              }}
-            />
-            <PlusCircleIcon
-              className="w-10 h-10 text-[#3f3d56] ml-4 cursor-pointer"
-              onClick={todo === "" ? showError : addOneTodoToAllTodos}
-            />
-          </div>
-          {error ? (
-            <p className="flex justify-center text-[#3f3d56] font-normal p-2 text-2xl">
-              {error}
-            </p>
-          ) : (
-            <p className="flex justify-center text-[#3f3d56] font-normal p-2 text-2xl"></p>
-          )}
-        </div>
+        <TodoInput
+          todo={todo}
+          addTodo={addTodo}
+          inputRef={inputRef}
+          onKeyPress={(e) => onKeyPress(e)}
+          showError={showError}
+          addOneTodoToAllTodos={addOneTodoToAllTodos}
+          error={error}
+        />
 
         <div className="flex-col justify-center align-middle pr-6 md:pr-20 lg:pr-56 pl-6 md:pl-20 lg:pl-56 gap-1 items-center mt-12">
           <div className="flex justify-between">
@@ -139,55 +118,13 @@ function Todo() {
             return (
               <div key={Todo.id}>
                 {Todo.wantToEdit === false ? (
-                  Todo.checkedOrNot === false ? (
-                    <div className="flex justify-center align-middle items-center mt-6">
-                      <input
-                        type="checkbox"
-                        className="w-8 h-8 text-[#3f3d56] mr-2 md:mr-4 cursor-pointer accent-[#DDF2FD]"
-                        onClick={() => checkTodo(Todo.id)}
-                      />
-                      <p className=" bg-white rounded-md p-2 w-full text-[#3f3d56] outline-none overflow-hidden border-2 border-[#3A4D39]">
-                        {" "}
-                        {Todo.todo}{" "}
-                      </p>
-                      <PencilSquareIcon
-                        className="w-8 h-8 text-[#3f3d56] ml-2 md:ml-4 cursor-pointer"
-                        onClick={() => {
-                          Todo.wantToEdit = true;
-                          setEditedTodo(Todo.todo);
-                          setError("");
-                        }}
-                      />
-                      <TrashIcon
-                        className="w-8 h-8 text-[#3f3d56] ml-2 md:ml-4 cursor-pointer"
-                        onClick={() => deleteTodo(Todo.id)}
-                      />{" "}
-                    </div>
-                  ) : (
-                    <div className="flex justify-center align-middle items-center mt-6">
-                      <input
-                        type="checkbox"
-                        className="w-8 h-8 text-[#3f3d56] mr-2 md:mr-4 cursor-pointer accent-[#DDF2FD]"
-                        onClick={() => checkTodo(Todo.id)}
-                      />
-                      <p className="border-2 bg-[#DDF2FD] rounded-md p-2 w-full text-[#116A7B] outline-none line-through overflow-hidden">
-                        {" "}
-                        {Todo.todo}{" "}
-                      </p>
-                      <PencilSquareIcon
-                        className="w-8 h-8 text-[#3f3d56] ml-2 md:ml-4 cursor-pointer"
-                        onClick={() => {
-                          Todo.wantToEdit = true;
-                          setEditedTodo(Todo.todo);
-                          setError("");
-                        }}
-                      />
-                      <TrashIcon
-                        className="w-8 h-8 text-[#3f3d56] ml-2 md:ml-4 cursor-pointer"
-                        onClick={() => deleteTodo(Todo.id)}
-                      />{" "}
-                    </div>
-                  )
+                  <TodoOutput
+                    Todo={Todo}
+                    setEditedTodo={setEditedTodo}
+                    setError={setError}
+                    checkTodo={() => checkTodo(Todo.id)}
+                    deleteTodo={deleteTodo}
+                  />
                 ) : (
                   <div className="flex justify-center align-middle items-center mt-6">
                     <input
